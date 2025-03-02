@@ -169,3 +169,27 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+
+# Electron-specific files
+.dist
+ui/node_modules/
+ui/.dist/
+ui/out/
+ui/.cache/
+ui/.electron/
+ui/.vscode/
+ui/electron-builder-cache/
+ui/electron-rebuild-cache/
+ui/yarn.lock
+ui/package-lock.json
+
+# Ignore log files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+
+# Own shit
+Recyclebin__
