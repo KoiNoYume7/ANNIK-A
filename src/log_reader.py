@@ -5,14 +5,20 @@ import re
 LOG_FILE_PATH = r"C:\Program Files\Roberts Space Industries\StarCitizen\LIVE\Game.log"
 PLAYER_NAME = "KoiNoYume7"  # Change this to your in-game name
 
+# Debug mode: Set to True to show full log entries, False for just ship detections
+DEBUG = False  # Default is OFF
+
 # List of known ship manufacturers
 SHIP_MANUFACTURERS = ["RSI", "DRAK", "MISC", "ANVL", "AEGS", "CRUS", "ARGO", "CNOU", "ORIG", "VNCL"]
+
+# Exclude known junk prefixes (things that aren't ships)
+EXCLUDED_PREFIXES = ["FTUE_", "SOC_", "StreamingSOC_", "TagPoint_", "Room_", "Elevator_", "Hangar_", "Transit_", "SpawnCloset_"]
 
 # Improved regex to detect ships & filter out unnecessary prefixes (like SCItem_Debris)
 SHIP_REGEX = re.compile(r"Entity \[.*?([A-Z]+_[A-Za-z0-9]+(?:_[A-Za-z0-9]+)*_\d+)]")
 
-def process_log_line(line):
-    """Processes a single log line to extract the player's ship name."""
+def process_log_line(line, line_number):
+    """Processes a single log line to extract the player's ship name and includes optional debug output."""
     if PLAYER_NAME in line and "Entity [" in line and "m_ownerGEID" in line:
         match = SHIP_REGEX.search(line)
         if match:
@@ -21,16 +27,27 @@ def process_log_line(line):
             # Clean up any junk before the actual ship name (like SCItem_Debris_)
             ship_name = re.sub(r"^SCItem_Debris_\d+_", "", raw_ship_name)
 
+            # Ignore non-ship objects using the excluded prefixes
+            if any(ship_name.startswith(prefix) for prefix in EXCLUDED_PREFIXES):
+                return  # Skip this detection, it's not a ship
+
             # Ensure it's a real ship (not an object)
             if any(ship_name.startswith(manufacturer) for manufacturer in SHIP_MANUFACTURERS):
-                print(f"🚀 Detected Ship: {ship_name}")
+                if DEBUG:
+                    print(f"\n🚀 Detected Ship: {ship_name} (Log Line: {line_number})\n🔍 Log Entry: {line.strip()}\n")
+                else:
+                    print(f"🚀 Detected Ship: {ship_name}")
             elif "_" in ship_name:
-                print(f"🚀 Detected Ship: {ship_name} (No manufacturer, but valid structure)")
+                if DEBUG:
+                    print(f"\n🚀 Detected Ship: {ship_name} (No manufacturer, but valid structure) (Log Line: {line_number})\n🔍 Log Entry: {line.strip()}\n")
+                else:
+                    print(f"🚀 Detected Ship: {ship_name} (No manufacturer, but valid structure)")
 
 def tail_log():
-    """Continuously reads Game.log as new lines are added."""
+    """Continuously reads Game.log as new lines are added, with full line output if debug mode is enabled."""
     with open(LOG_FILE_PATH, "r", encoding="utf-8") as file:
         file.seek(0, 2)  # Move to end of file
+        line_number = sum(1 for _ in open(LOG_FILE_PATH, "r", encoding="utf-8"))  # Get initial line count
 
         while True:
             line = file.readline()
@@ -38,10 +55,16 @@ def tail_log():
                 time.sleep(0.1)  # Prevent high CPU usage
                 continue
 
-            process_log_line(line)
+            line_number += 1
+            process_log_line(line, line_number)
 
 if __name__ == "__main__":
     print("🔍 Monitoring Star Citizen logs for **your** ship...")
+    if DEBUG:
+        print("🛠 Debug Mode: ON (Showing full log entries)")
+    else:
+        print("⚡ Debug Mode: OFF (Showing only detected ships)")
+
     try:
         tail_log()
     except KeyboardInterrupt:
