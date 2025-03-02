@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ANNIK-A Ship Monitor</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #101010;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            color: #ff847c; /* Soft salmon pink */
+            font-size: 28px;
+        }
+        #ship-list {
+            width: 70%;
+            margin: auto;
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 10px;
+            background: rgba(0, 255, 204, 0.1); /* Teal glow */
+            border-radius: 10px;
+            border: 1px solid #ff847c;
+        }
+        .ship-entry {
+            font-size: 16px;
+            padding: 10px;
+            margin: 5px 0;
+            background: rgba(0, 255, 204, 0.2); /* Teal glow effect */
+            border-left: 4px solid #ff847c; /* Salmon pink side bar */
+            transition: opacity 0.3s ease-in-out;
+            opacity: 0;
+        }
+        .ship-entry.fade-in {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <h1>ANNIK-A Ship Monitor</h1>
+    <div id="ship-list">
+        <p>Waiting for ship detections...</p>
+    </div>
+
+    <script>
+        const { ipcRenderer } = require('electron');
+
+        ipcRenderer.on('update-data', (event, message) => {
+            const shipList = document.getElementById("ship-list");
+
+            // Create new ship entry
+            let newEntry = document.createElement("div");
+            newEntry.classList.add("ship-entry");
+            newEntry.innerText = message;
+            
+            // Add fade-in effect
+            setTimeout(() => newEntry.classList.add("fade-in"), 10);
+
+            // Append to list
+            shipList.appendChild(newEntry);
+
+            // Auto-scroll to bottom
+            shipList.scrollTop = shipList.scrollHeight;
+        });
+    </script>
+</body>
+</html>
