@@ -1,5 +1,6 @@
 import time
 import re
+import sys
 
 # Path to Game.log
 LOG_FILE_PATH = r"C:\Program Files\Roberts Space Industries\StarCitizen\LIVE\Game.log"
@@ -18,7 +19,7 @@ EXCLUDED_PREFIXES = ["FTUE_", "SOC_", "StreamingSOC_", "TagPoint_", "Room_", "El
 SHIP_REGEX = re.compile(r"Entity \[.*?([A-Z]+_[A-Za-z0-9]+(?:_[A-Za-z0-9]+)*_\d+)]")
 
 def process_log_line(line, line_number):
-    """Processes a single log line to extract the player's ship name and includes optional debug output."""
+    """Processes a single log line to extract the player's ship name and sends it to Electron."""
     if PLAYER_NAME in line and "Entity [" in line and "m_ownerGEID" in line:
         match = SHIP_REGEX.search(line)
         if match:
@@ -33,15 +34,14 @@ def process_log_line(line, line_number):
 
             # Ensure it's a real ship (not an object)
             if any(ship_name.startswith(manufacturer) for manufacturer in SHIP_MANUFACTURERS):
-                if DEBUG:
-                    print(f"\n🚀 Detected Ship: {ship_name} (Log Line: {line_number})\n🔍 Log Entry: {line.strip()}\n")
-                else:
-                    print(f"🚀 Detected Ship: {ship_name}")
+                output = f"Detected Ship: {ship_name}"
             elif "_" in ship_name:
-                if DEBUG:
-                    print(f"\n🚀 Detected Ship: {ship_name} (No manufacturer, but valid structure) (Log Line: {line_number})\n🔍 Log Entry: {line.strip()}\n")
-                else:
-                    print(f"🚀 Detected Ship: {ship_name} (No manufacturer, but valid structure)")
+                output = f"Detected Ship: {ship_name} (No manufacturer, but valid structure)"
+            else:
+                return  # Skip invalid detections
+
+            # Print to stdout & flush to send immediately to Electron
+            print(output, flush=True)
 
 def tail_log():
     """Continuously reads Game.log as new lines are added, with full line output if debug mode is enabled."""
@@ -59,13 +59,13 @@ def tail_log():
             process_log_line(line, line_number)
 
 if __name__ == "__main__":
-    print("🔍 Monitoring Star Citizen logs for **your** ship...")
+    print("Monitoring Star Citizen logs for your ship...", flush=True)
     if DEBUG:
-        print("🛠 Debug Mode: ON (Showing full log entries)")
+        print("Debug Mode: ON (Showing full log entries)", flush=True)
     else:
-        print("⚡ Debug Mode: OFF (Showing only detected ships)")
+        print("Debug Mode: OFF (Showing only detected ships)", flush=True)
 
     try:
         tail_log()
     except KeyboardInterrupt:
-        print("\n🛑 Monitoring stopped.")
+        print("\nMonitoring stopped.", flush=True)
