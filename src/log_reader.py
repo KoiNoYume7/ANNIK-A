@@ -7,7 +7,7 @@ LOG_FILE_PATH = r"C:\Program Files\Roberts Space Industries\StarCitizen\LIVE\Gam
 PLAYER_NAME = "KoiNoYume7"  # Change this to your in-game name
 
 # Debug mode: Set to True to show full log entries, False for just ship detections
-DEBUG = False  # Default is OFF
+DEBUG = False  # Default is Off
 
 # List of known ship manufacturers
 SHIP_MANUFACTURERS = ["RSI", "DRAK", "MISC", "ANVL", "AEGS", "CRUS", "ARGO", "CNOU", "ORIG", "VNCL"]
