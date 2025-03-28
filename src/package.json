@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "electron main.js"
+    "start": "electron src/ui/main.js"
   },
   "keywords": [],
   "author": "",
