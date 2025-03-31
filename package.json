@@ -1,16 +1,46 @@
 {
-  "name": "ui",
+  "name": "annik-a",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/electron/main.js",
   "scripts": {
-    "start": "electron src/ui/main.js"
+    "start": "webpack serve",
+    "electron": "electron .",
+    "dev": "concurrently \"npm run start\" \"npm run electron\""
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "KoiNoYume7, Araytar(TJD)",
+  "license": "MIT",
   "description": "",
   "dependencies": {
-    "electron": "^34.3.0",
-    "electron-reload": "^2.0.0-alpha.1"
+    "electron": "^34.4.1",
+    "electron-reload": "^2.0.0-alpha.1",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-scripts": "^5.0.1",
+    "three": "^0.175.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.26.10",
+    "@babel/preset-env": "^7.26.9",
+    "@babel/preset-react": "^7.26.3",
+    "babel-loader": "^10.0.0",
+    "concurrently": "^9.1.2",
+    "electron-builder": "^26.0.12",
+    "html-webpack-plugin": "^5.6.3",
+    "webpack": "^5.98.0",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.1"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

@@ -35,7 +35,7 @@ pip install watchdog pandas requests
 
 Install Node dependencies for the UI:
 ```bash
-cd ui
+cd electron
 npm install
 ```
 
@@ -46,7 +46,7 @@ python src/log_reader.py
 ```
 #### **Start the Electron UI**
 ```bash
-cd ui
+cd electron
 npm start
 ```
 
