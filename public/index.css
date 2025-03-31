@@ -1,9 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>ANNIK-A Ship Monitor</title>
-    <style>
         body {
             font-family: 'Arial', sans-serif;
             background-color: #101010;
@@ -37,34 +31,3 @@
         .ship-entry.fade-in {
             opacity: 1;
         }
-    </style>
-</head>
-<body>
-    <h1>ANNIK-A Ship Monitor</h1>
-    <div id="ship-list">
-        <p>Waiting for ship detections...</p>
-    </div>
-
-    <script>
-        const { ipcRenderer } = require('electron');
-
-        ipcRenderer.on('update-data', (event, message) => {
-            const shipList = document.getElementById("ship-list");
-
-            // Create new ship entry
-            let newEntry = document.createElement("div");
-            newEntry.classList.add("ship-entry");
-            newEntry.innerText = message;
-            
-            // Add fade-in effect
-            setTimeout(() => newEntry.classList.add("fade-in"), 10);
-
-            // Append to list
-            shipList.appendChild(newEntry);
-
-            // Auto-scroll to bottom
-            shipList.scrollTop = shipList.scrollHeight;
-        });
-    </script>
-</body>
-</html>
