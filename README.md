@@ -1,65 +1,145 @@
-# ANNIK-A (Automated Network & Interface Kernel)
+# ANNIK-A
+> "From cargo to credits, ANNIK-A has your back."
 
-## 🚀 Overview
-**ANNIK-A** (or **ANI-A** for short) is a real-time external **ship detection and data overlay system** for **Star Citizen**. It extracts live data from log files, detects the player's currently piloted ship, and fetches relevant stats for display on an external device or second monitor.
+**ANNIK-A**
+- **A**nalytics
+- **N**avigation
+- **N**etwork
+- **I**nterface
+- **K**nowledge
+- **A**ssistant
 
-## 🌟 Features
-- **🔍 Log File Parsing** → Reads and processes Star Citizen log files in real-time.
-- **🚢 Ship Detection** → Identifies the player's currently piloted ship.
-- **📊 Data Overlay** → Displays ship stats, cargo capacity, and other useful information.
-- **🌐 API Integration** → Fetches ship details dynamically from the **Star Citizen Wiki API**.
-- **📡 Modular & Expandable** → Designed as a multi-use framework for future integrations.
+is a powerful and extensible Star Citizen companion tool designed to bring maximum efficiency, clarity, and control to the cargo experience within the 'verse.
 
-## 📂 Repository Structure
-```
-ANNIK-A/
-│── src/         # Main scripts for log parsing and data processing
-│── logs/        # Test log files (for debugging purposes)
-│── ui/          # Electron-based graphical interface
-│── docs/        # Documentation & API references
-│── README.md    # Project documentation
-│── package.json # Electron dependencies
-```
+The name "ANNIK-A" is inspired by a real person who helped spark the concept.
 
-## 🔧 Getting Started
-### **1️⃣ Installation**
-#### **Dependencies**
-Ensure you have the following installed:
-- **Python 3.x**
-- **Node.js & npm** (for the Electron UI)
+---
 
-Then, install required Python dependencies:
+## 🚀 Project Vision
+
+ANNIK-A aims to be the ultimate Star Citizen utility, combining:
+- Real-time **ship activity tracking**
+- **Up-to-date** information for everything thanks to **APIs** (see @**APIs, Collaborations and Partnerships**)
+- Advanced **3D cargo grid visualizer**
+- Smart logic for **manual vs auto loading decisions**
+- **Trip and profit logging** based on game.log parsing
+- Planned future support for **mining/refinery optimizations**
+
+The goal: to save time, increase profit margins, and turn chaos into clean logistics.
+
+---
+
+## 🧩 Core Features
+
+### ✅ Implemented
+- Track pulled ships and ship destruction from Star Citizen's `game.log`
+- Calculate trip durations & inferred profit margins
+- Config parser & internal logic foundation
+
+### 🚧 In Development
+- 3D Cargo Grid Viewer with smart box fitting
+- Efficient cargo packing (reduce number of boxes needed to load)
+- Basic UI logic groundwork (Electron + React)
+
+### 🌱 Planned
+- Mining mode: Assist refinery output prediction to avoid oversized box errors
+- Station-specific loading logic (auto/manual time analysis)
+- Profit-per-trip visualization
+- API integrations with:
+  - Star Citizen Wiki
+  - uex.corp (if available)
+  - sc-trade.tools (if accessible)
+  - regolith.rocks (non-conflicting)
+
+---
+
+## 🛠️ Technologies Used
+- Python (core logic, log parsing)
+- React + Electron (UI/frontend layer)
+- Webpack (frontend build tool)
+- JSON cargo grid mapping per ship model
+- Optimized log reading for your ship
+
+---
+
+## 📦 Getting Started
+
+### 1️⃣ Installation
+
+#### Dependencies
+Make sure you have the following installed:
+- **Python 3.1x**
+- **Node.js & npm**
+
+Install Python dependencies:
 ```bash
-pip install watchdog pandas requests
+pip install watchdog requests
 ```
 
-Install Node dependencies for the UI:
+Install Node dependencies:
 ```bash
-cd electron
 npm install
 ```
 
-### **2️⃣ Running ANNIK-A**
-#### **Run the Python Log Monitor**
+### 2️⃣ Running ANNIK-A (Dev Mode)
+
+Run ANNIK-A in development mode (React + Electron):
 ```bash
-python src/log_reader.py
-```
-#### **Start the Electron UI**
-```bash
-cd electron
-npm start
+npm run dev
 ```
 
-## 🎧 Notes
-- **Make sure Star Citizen is running**, as log files update in real-time.
-- **Configure `log_reader.py` with your in-game player name** for accurate detection.
-- The UI will automatically update as new ships are detected.
+> Make sure Star Citizen is running and logs are updating in real-time.
 
-## ⚠ Roadmap
-- **✅ Log file parsing** (Extract ship data in real-time)
-- **🛠️ API integration** (Fetch ship details dynamically)
-- **🔬 Advanced tracking** (Landing gear, docked status, etc.)
-- **💡 Data display overlay** (Show stats externally)
+## 🗂️ Project File Structure
 
-## 🐝 License
-MIT License (Open Source & Free to Modify)
+```
+ANNIK-A
+|   .gitignore
+|   dependencies.bat
+|   LICENSE
+|   package.json
+|   README.md
+|   webpack.config.js
+|   
++---public
+|       index.css
+|       index.html
+|
+\---src
+    |   index.jsx
+    |   log_reader.py
+    |   main.py
+    |
+    +---electron
+    |       main.js
+    |
+    \---features
+        +---configParser
+        |       cfg.py
+        |
+        +---grid3DViewer
+        |   |   3DViewer.js
+        |   |   cargoGridManager.py
+        |   \---grids
+        |           origin100i.json
+        |
+        \---logger
+                logger.py
+```
+
+## 🌐 APIs, Collaborations and Partnerships
+
+### APIs Used
+- https://starcitizen.tools
+
+### Collaborations
+- @Araytar
+
+### Partnerships
+- none (yet?)
+
+---
+
+## 📝 Last Words
+Thanks to my dude Araytar for helping me, ChatGPT who wrote this README because Akira was too lazy, and the community for providing APIs (those are lifesavers).
+
