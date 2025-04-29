@@ -13,47 +13,39 @@ is a powerful and extensible **cargo-focused companion tool for *Star Citizen***
 
 Whether you're hauling freight across systems, planning mining runs, or trying to squeeze every SCU into your ship, ANNIK-A helps you **plan smarter, load faster, and profit more**.
 
-The name "ANNIK-A" is inspired by a real person who helped spark the concept.
+> The name "ANNIK-A" has been inspired by a person who helped me actually work on Projects like this. In honor to this person, it has become the name of this Project.
 
 ---
 
-## 🚀 Project Vision
+## Project Vision
 
 ANNIK-A aims to be the ultimate Star Citizen utility, combining:
-- Real-time **ship activity tracking**
+- Assisting in cargo logic with **optional** automatic game.log tracker to save time and increase accuracy.
 - **Up-to-date** information using **Star Citizen Wiki API**
 - Advanced **3D cargo grid visualizer**
 - Smart logic for **manual vs auto loading decisions**
 - **Planned** profit and trip logging
 - Future support for **mining/refinery optimizations**
 
-The goal: to save time, increase profit margins, and turn chaos into clean logistics.
+The goal: to help new and experienced players manage cargo, save time, increase profit margins, and turn chaos into clean logistics. 
 
----
-
-## 🤩 Core Features
+## Core Features
 
 ### ✅ Implemented
-- Basic player and ship tracking from Star Citizen `game.log`
-- Ship spawn and hangar state monitoring
+- Basic player and ship tracking from Star Citizen `game.log` for optional automatisation
 - Config parser for internal modular settings
 - Log reading and event handling foundations (`main.py` + `log_reader.py`)
 
 ### 🚧 In Development
 - 3D Cargo Grid Viewer with smart box fitting
 - Cargo grid calculator (fitting cargo efficiently into ships)
-- UI groundwork with Electron + React
+- UI groundwork with Electron + React and website (for both dekstop app or website access)
 - Python ↔ Electron integration (backend-frontend connection)
 
 ### 🌱 Planned
 - Mining mode: Predict refinery output and container fitting
-- Station-specific loading logic (analyzing best loading method per station)
-- Profit-per-trip visualization and logging
-- Extended API integrations:
-  - Star Citizen Wiki
-  - uex.corp (if accessible)
-  - sc-trade.tools (pending)
-  - regolith.rocks (non-conflicting)
+- For visualization and logging
+- Multi-crew logic
 
 ---
 
@@ -61,10 +53,8 @@ The goal: to save time, increase profit margins, and turn chaos into clean logis
 - Python (core logic, log parsing, cargo calculations)
 - React + Electron (frontend and desktop app shell)
 - Webpack (build tooling)
-- JSON for ship cargo grid layouts
+- JSON for ship cargo grid layouts (for developing reasons, not yet optimized)
 - Star Citizen Wiki API for live data
-
----
 
 ## 📦 Getting Started
 
@@ -93,8 +83,7 @@ npm run dev
 ```
 
 > Make sure Star Citizen is running and logs are updating live.
-
----
+Path and user handle must be edited manually for now!
 
 ## 📂 Project File Structure (as of April 28, 2025)
 
@@ -144,8 +133,6 @@ ANNIK-A
     |   (electron installed files)
 ```
 
----
-
 ## 🌐 APIs, Collaborations and Partnerships
 
 ### APIs Used
@@ -154,17 +141,9 @@ ANNIK-A
 ### Collaborations
 - @Araytar (backend integration)
 
-### Partnerships
-- none yet (but open to future partnerships)
-
----
 
 ## 📝 Last Words
 
-Special thanks to @Araytar for being a beast with backend logic, ChatGPT for helping structure documentation, and the Star Citizen community for providing open APIs.
+Special thanks to @Araytar for being a beast with backend logic, ChatGPT for writing documentations and the Star Citizen community for providing open APIs (love yall ^^).
 
-ANNIK-A is open source and welcomes future contributions, especially cargo grid layouts for all ships!
-
-> "From cargo to credits, we got your back."
-
----
+ANNIK-A is open source and welcomes future contributions, especially maintaining everything up-to-date, because I am lazy.
