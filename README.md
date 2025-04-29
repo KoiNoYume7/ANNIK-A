@@ -1,4 +1,4 @@
-# ANNIK-A
+# ANNIK-A - Star Citizen Cargo Assistant
 > "From cargo to credits, ANNIK-A has your back."
 
 **ANNIK-A**
@@ -9,7 +9,9 @@
 - **K**nowledge
 - **A**ssistant
 
-is a powerful and extensible Star Citizen companion tool designed to bring maximum efficiency, clarity, and control to the cargo experience within the 'verse.
+is a powerful and extensible **cargo-focused companion tool for *Star Citizen***, designed to maximize cargo efficiency, track your ship activities, and optimize trading operations in the 'verse.
+
+Whether you're hauling freight across systems, planning mining runs, or trying to squeeze every SCU into your ship, ANNIK-A helps you **plan smarter, load faster, and profit more**.
 
 The name "ANNIK-A" is inspired by a real person who helped spark the concept.
 
@@ -19,46 +21,48 @@ The name "ANNIK-A" is inspired by a real person who helped spark the concept.
 
 ANNIK-A aims to be the ultimate Star Citizen utility, combining:
 - Real-time **ship activity tracking**
-- **Up-to-date** information for everything thanks to **APIs** (see @**APIs, Collaborations and Partnerships**)
+- **Up-to-date** information using **Star Citizen Wiki API**
 - Advanced **3D cargo grid visualizer**
 - Smart logic for **manual vs auto loading decisions**
-- **Trip and profit logging** based on game.log parsing
-- Planned future support for **mining/refinery optimizations**
+- **Planned** profit and trip logging
+- Future support for **mining/refinery optimizations**
 
 The goal: to save time, increase profit margins, and turn chaos into clean logistics.
 
 ---
 
-## 🧩 Core Features
+## 🤩 Core Features
 
 ### ✅ Implemented
-- Track pulled ships and ship destruction from Star Citizen's `game.log`
-- Calculate trip durations & inferred profit margins
-- Config parser & internal logic foundation
+- Basic player and ship tracking from Star Citizen `game.log`
+- Ship spawn and hangar state monitoring
+- Config parser for internal modular settings
+- Log reading and event handling foundations (`main.py` + `log_reader.py`)
 
 ### 🚧 In Development
 - 3D Cargo Grid Viewer with smart box fitting
-- Efficient cargo packing (reduce number of boxes needed to load)
-- Basic UI logic groundwork (Electron + React)
+- Cargo grid calculator (fitting cargo efficiently into ships)
+- UI groundwork with Electron + React
+- Python ↔ Electron integration (backend-frontend connection)
 
 ### 🌱 Planned
-- Mining mode: Assist refinery output prediction to avoid oversized box errors
-- Station-specific loading logic (auto/manual time analysis)
-- Profit-per-trip visualization
-- API integrations with:
+- Mining mode: Predict refinery output and container fitting
+- Station-specific loading logic (analyzing best loading method per station)
+- Profit-per-trip visualization and logging
+- Extended API integrations:
   - Star Citizen Wiki
-  - uex.corp (if available)
-  - sc-trade.tools (if accessible)
+  - uex.corp (if accessible)
+  - sc-trade.tools (pending)
   - regolith.rocks (non-conflicting)
 
 ---
 
 ## 🛠️ Technologies Used
-- Python (core logic, log parsing)
-- React + Electron (UI/frontend layer)
-- Webpack (frontend build tool)
-- JSON cargo grid mapping per ship model
-- Optimized log reading for your ship
+- Python (core logic, log parsing, cargo calculations)
+- React + Electron (frontend and desktop app shell)
+- Webpack (build tooling)
+- JSON for ship cargo grid layouts
+- Star Citizen Wiki API for live data
 
 ---
 
@@ -88,9 +92,11 @@ Run ANNIK-A in development mode (React + Electron):
 npm run dev
 ```
 
-> Make sure Star Citizen is running and logs are updating in real-time.
+> Make sure Star Citizen is running and logs are updating live.
 
-## 🗂️ Project File Structure
+---
+
+## 📂 Project File Structure (as of April 28, 2025)
 
 ```
 ANNIK-A
@@ -100,46 +106,65 @@ ANNIK-A
 |   package.json
 |   README.md
 |   webpack.config.js
-|   
+|
++---!documentation!
+|       LOGREADER.md
+|       PROJECTSTRUCTURE.md
+|
++---.dist
++---logs
 +---public
 |       index.css
 |       index.html
 |
-\---src
-    |   index.jsx
-    |   log_reader.py
-    |   main.py
-    |
-    +---electron
-    |       main.js
-    |
-    \---features
-        +---configParser
-        |       cfg.py
-        |
-        +---grid3DViewer
-        |   |   3DViewer.js
-        |   |   cargoGridManager.py
-        |   \---grids
-        |           origin100i.json
-        |
-        \---logger
-                logger.py
++---src
+|   |   index.jsx
+|   |   log_reader.py
+|   |   main.py
+|   |
+|   +---electron
+|   |       main.js
+|   |
+|   +---features
+|   |   +---configParser
+|   |   |       cfg.py
+|   |   +---grid3DViewer
+|   |   |   |   3DViewer.js
+|   |   |   |   cargoGridManager.py
+|   |   |   \---grids
+|   |   |           origin100i.json
+|   |   \---logger
+|   |           logger.py
+|   |
+|   \---utils
+|           (ship stats deprecated)
+|
+\---ui
+    |   package-lock.json
+    |   (electron installed files)
 ```
+
+---
 
 ## 🌐 APIs, Collaborations and Partnerships
 
 ### APIs Used
-- https://starcitizen.tools
+- https://starcitizen.tools (Star Citizen Wiki)
 
 ### Collaborations
-- @Araytar
+- @Araytar (backend integration)
 
 ### Partnerships
-- none (yet?)
+- none yet (but open to future partnerships)
 
 ---
 
 ## 📝 Last Words
-Thanks to my dude Araytar for helping me, ChatGPT who wrote this README because Akira was too lazy, and the community for providing APIs (those are lifesavers).
 
+Special thanks to @Araytar for being a beast with backend logic, ChatGPT for helping structure documentation, and the Star Citizen community for providing open APIs.
+
+ANNIK-A is open source and welcomes future contributions, especially cargo grid layouts for all ships!
+
+> "From cargo to credits, we got your back."
+
+---
