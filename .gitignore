@@ -203,4 +203,5 @@ yarn-error.log*
 # Own shit
 Recyclebin__
 docs/
-*.myshit*
+*.my*
+my/
