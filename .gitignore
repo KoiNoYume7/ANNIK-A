@@ -1,5 +1,5 @@
-# main logic
-settings.json
+# local only things
+user/
 
 # Node.js
 node_modules

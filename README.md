@@ -67,7 +67,7 @@ Make sure you have the following installed:
 
 Install Python dependencies:
 ```bash
-pip install watchdog requests
+pip install -r requirements.txt 
 ```
 
 Install Node dependencies:

@@ -1,1 +1,1 @@
-pip install requests, configparser, numpy
+pip install pipreqs
